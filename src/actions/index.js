@@ -8,6 +8,22 @@ import {
 } from './types';
 
 const ROOT_URL = 'http://localhost:3090';
+const authAxios = axios.create({
+    headers: {authorization: localStorage.getItem('token')}
+});
+
+export function postNewReview({projectName, singleSentance, threeSentance, photoMain, team, launchDate, delivery, gradeOverall, gradeMaking, gradeFinancials, gradeFeasible, projectSummary, detailOverall, detailManufacturing, detailBudget, detailEngineering}) {
+    return function(dispatch) {
+/*        axios.post(`${ROOT_URL}/review_secretspot`, 
+                   {headers: {authorization: localStorage.getItem('token')}, 
+                    projectName, singleSentance, threeSentance, photoMain, team, launchDate, delivery, gradeOverall, gradeMaking, gradeFinancials, gradeFeasible, projectSummary, detailOverall, detailManufacturing, detailBudget, detailEngineering} )*/
+        authAxios.post(`${ROOT_URL}/review_secretspot`, {projectName, singleSentance, threeSentance, photoMain, team, launchDate, delivery, gradeOverall, gradeMaking, gradeFinancials, gradeFeasible, projectSummary, detailOverall, detailManufacturing, detailBudget, detailEngineering})
+        
+        .catch(error => {
+            dispatch(authError('review did not post'));
+        })
+    }
+}
 
 export function signinUser({ email, password }) {
     return function(dispatch) {
@@ -42,9 +58,6 @@ export function signupUser({ email, password }) {
             if (error.response) {
                 // The request was made, but the server responded with a status code 
                 // that falls out of the range of 2xx 
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
                 dispatch(authError(error.response.data));
             } else {
                 // Something happened in setting up the request that triggered an Error 

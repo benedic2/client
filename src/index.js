@@ -14,6 +14,8 @@ import RequireAuth from './components/auth/require_auth';
 import Welcome from './components/welcome';
 import reducers from './reducers';
 import { AUTH_USER } from './actions/types';
+import MainHome from './components/main_home';
+import NewReviewForm from './components/superUser/review_form';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
@@ -29,11 +31,12 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
-        <IndexRoute component={Welcome} />
+        <IndexRoute component={MainHome} />
         <Route path="signin" component={Signin} />
         <Route path="signout" component={Signout} />
         <Route path="signup" component={Signup} />
         <Route path="feature" component={RequireAuth(Feature)} />
+        <Route path="newreview" component={RequireAuth(NewReviewForm)} />
       </Route>
     </Router>
   </Provider>

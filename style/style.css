@@ -1,3 +1,226 @@
-.error {
-  color: red;
+/* CSS for a blue simple scrollbar */
+::-webkit-scrollbar {
+    width: 7px;
+}
+::-webkit-scrollbar:horizontal {
+    height: 7px;
+    
+} 
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(241,204,255,0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(50,200,200,0); 
+}
+
+/* Front Page Css*/
+.project-div{
+    color: black;
+    margin: 0px;
+    padding:5px;
+}
+
+.project-inner-div{
+    background-color: #fafafa;
+    border-radius: 10px;
+    border: 1px gray solid;
+    padding:5px;
+    color: black;
+    width:100%;
+}
+
+.project-img{
+    border-radius: 8px;
+    padding-bottom:5px;
+}
+
+
+
+/* CSS for Carousel*/
+.carousel-text{
+    margin-right:10%;
+    margin-left:10%;
+}
+
+.carousel-my{
+    background-image: none;
+    height:500px;
+    overflow-y: auto;    
+}
+.carousel-my::-webkit-scrollbar { 
+    display: none; 
+}
+
+.carousel-control.left, .carousel-control.right {
+    background-image: none;
+    color: #d052ff;
+ }
+
+
+/* CSS for Comments*/
+
+.comment {
+    border-radius: 10px;
+    border: 1px gray solid;
+    background-color: #f4f4f4;
+    padding:5%;
+    margin: 10px;
+}
+
+.comment-container {
+    overflow-y: scroll;
+    height: 935px;
+
+}
+
+
+/* CSS for progress*/
+
+.main-progress{
+    text-align: center;
+    font-size: 20px;
+    height: 30px;
+    line-height: 30px;
+    padding-bottom: 10px;
+}
+
+
+.container-footer {
+    padding-bottom: 200px;
+    background-color: #f4f4f4;
+}
+
+.primary-bg {
+    background-color: #d052ff;
+}
+
+.primary-bg-light {
+    background-color: #f1ccff;
+}
+
+.infobar{
+border: none; 
+text-decoration: none;
+}
+
+.primary {
+    color: #d052ff;
+    font-size: 20px;
+    font-weight: bolder;
+}
+.under-nav{
+    padding-top: 55px;
+}
+
+form a {
+    margin-left: 5px;
+}
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+/* Add a gray background color and some padding to the footer */
+.footer {
+  background-color: #f2f2f2;
+  padding: 25px;
+}
+.my_jumbotron {
+    position: relative;
+    background-image:  url('../resource/Background.jpg');
+    width: 100%;
+    min-height: 400px;
+    background-size: cover;
+    overflow: hidden;
+    border-radius: 0;
+}
+.headshot {
+    background-image: url('../resource/Head.png');
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    /* make it responsive */
+/*max-width: 50%;
+width:50%;
+height:auto;
+display:block; */
+/* div height to be the same as width*/
+padding-top:50%;   
+}
+.img-head {
+    border: 6px solid rgba(0,0,0,.7); 
+
+}
+.highlighter {
+    background: rgba(0,0,0,.5);
+    color: white;
+    padding: 2%;
+}
+.maintext {
+    color: red;
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: underline;
+    text-decoration-color: black;
+}
+.thumbnail {
+    position: relative;
+}
+
+.caption {
+    position: absolute;
+    top: 45%;
+    left: 0;
+    width: 100%;
+}
+
+
+.footerBanner div h2 {
+    background:rgba(255,255,255,0.8);
+    color: black;
+}
+
+.footerBanner:hover div h2 {
+    background:rgba(0,0,0,0.5);
+    color: white;
+     -webkit-transform: translateY(-5px);
+      -ms-transform: translateY(-5px);
+      transform: translateY(-5px);
+     -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+.smedia {
+    height: 20px;
+    width: 20px;
+}
+
+.overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: rgba(0,0,0,0.5);
+
+}
+.overlay1{
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 11;
+  background-color: rgba(0,0,0,0.5); /*dim the background*/
 }
