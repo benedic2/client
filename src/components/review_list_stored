@@ -1,0 +1,57 @@
+//Map function not seemingly working, but not crashing either
+
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import _ from 'lodash';
+
+import {fetchReviews} from '../actions/index';
+
+class ReviewsList extends Component {
+    componentDidMount () {
+        this.props.fetchReviews();
+    }
+
+    
+    renderReviews() {
+        return _.map(this.props.reviews, review => {
+            return (
+                <Link to ={`/reviews/${review.id}`} key={review.id}>
+                    <div className="col-md-2 col-sm-1 text-right" ></div>
+                    <div className="project-div col-md-2 col-sm-3 col-xs-6 text-left">
+                        <div className="project-inner-div">
+                            <img src={review.photoMain} className="img-responsive project-img" alt="Responsive Image" />
+                            <h4>{review.projectName}</h4>
+                            <p className="project-div-text">{review.threeSentance}</p>
+                            Overall grade        
+                            <div>
+                                <div className="progress" >
+                                    <div className="progress-bar " role="progressbar" aria-valuenow={review.gradeOverall} aria-valuemin="0" aria-valuemax="100" style = {{"width":"80%"}}>
+                                        <strong>B</strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </Link>
+
+            );
+        });
+    }
+
+    render() {
+        return (
+            <div className="row">
+                {this.renderReviews()}
+            </div>
+        );
+    }
+    
+}
+
+function mapStateToProps(state) {
+    return {reviews: state.reviews };
+}
+
+export default connect(mapStateToProps, {fetchReviews})(ReviewsList);

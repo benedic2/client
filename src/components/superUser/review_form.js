@@ -1,107 +1,160 @@
 import React, { Component } from 'react';
-import { reduxForm } from 'redux-form';
 import * as actions from '../../actions';
+import { Field, reduxForm } from 'redux-form';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { postNewReview } from '../../actions';
 
-class PostNewReview extends Component {
-    handleFormSubmit({ projectName, singleSentance, threeSentance, photoMain, team, launchDate, delivery, gradeOverall, gradeMaking, gradeFinancials, gradeFeasible, projectSummary, detailOverall, detailManufacturing, detailBudget, detailEngineering }) {
-        // Need to do something to log user in
-        this.props.postNewReview({ projectName, singleSentance, threeSentance, photoMain, team, launchDate, delivery, gradeOverall, gradeMaking, gradeFinancials, gradeFeasible, projectSummary, detailOverall, detailManufacturing, detailBudget, detailEngineering });
-    }
+class ReviewNew extends Component {
+  renderField(field) {
+    const { meta: { touched, error } } = field;
+    const className = `form-group ${touched && error ? 'has-danger' : ''}`;
 
-    renderAlert() {
-        if (this.props.errorMessage) {
-            return (
-                <div className="alert alert-danger">
-                    <strong>Oops!</strong> {this.props.errorMessage}
-                </div>
-            );
-        }
-    }
+    return (
+      <div className={className}>
+        <label>{field.label}</label>
+        <input
+          className="form-control"
+          type="text"
+          {...field.input}
+        />
+        <div className="text-help">
+          {touched ? error : ''}
+        </div>
+      </div>
+    );
+  }
 
-    render() {
-        const { handleSubmit, fields: { projectName, singleSentance, threeSentance, photoMain, team, launchDate, delivery, gradeOverall, gradeMaking, gradeFinancials, gradeFeasible, projectSummary, detailOverall, detailManufacturing, detailBudget, detailEngineering }} = this.props;
+  onSubmit(values) {
+    this.props.postNewReview(values, () => {
+      this.props.history.push('/');
+    });
+  }
 
-        return (
-            <form className="under-nav " onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+  render() {
+    const { handleSubmit } = this.props;
 
-                <fieldset className="form-group">
-                    <label>Project Name:</label>
-                    <input {...projectName} className="form-control" />
-                </fieldset>
-                <fieldset className="form-group">
-                    <label>Single Sentance Summary:</label>
-                    <input {...singleSentance} className="form-control" />
-                </fieldset>
-                <fieldset className="form-group">
-                    <label>Three Sentance Summary:</label>
-                    <input {...threeSentance} className="form-control" />
-                </fieldset>
-                <fieldset className="form-group">
-                    <label>Main photo:</label>
-                    <input {...photoMain} className="form-control" />
-                </fieldset>
-                <fieldset className="form-group">
-                    <label>Team:</label>
-                    <input {...team} className="form-control" />
-                </fieldset>                
-                <fieldset className="form-group">
-                    <label>Launch date:</label>
-                    <input {...launchDate} className="form-control" />
-                </fieldset>                
-                <fieldset className="form-group">
-                    <label>Delivery:</label>
-                    <input {...delivery} className="form-control" />
-                </fieldset>                
-                <fieldset className="form-group">
-                    <label>Overall grade:</label>
-                    <input {...gradeOverall} className="form-control" />
-                </fieldset>
-                <fieldset className="form-group">
-                    <label>Making it:</label>
-                    <input {...gradeMaking} className="form-control" />
-                </fieldset>
-                <fieldset className="form-group">
-                    <label>Funding grade:</label>
-                    <input {...gradeFinancials} className="form-control" />
-                </fieldset>
-                <fieldset className="form-group">
-                    <label>Feasability:</label>
-                    <input {...gradeFeasible} className="form-control" />
-                </fieldset>
-                 <fieldset className="form-group">
-                    <label>Project Summary:</label>
-                    <input {...projectSummary} className="form-control" />
-                </fieldset>
-                <fieldset className="form-group">
-                    <label>Overall Opinion:</label>
-                    <input {...detailOverall} className="form-control" />
-                </fieldset>
-                <fieldset className="form-group">
-                    <label>Manufacturing Opinion:</label>
-                    <input {...detailManufacturing} className="form-control" />
-                </fieldset>
-                <fieldset className="form-group">
-                    <label>Financial Opinion:</label>
-                    <input {...detailBudget} className="form-control" />
-                </fieldset>
-                <fieldset className="form-group">
-                    <label>Engineering Challenge:</label>
-                    <input {...detailEngineering} className="form-control" />
-                </fieldset>
-               
-                
-                {this.renderAlert()}
-                <button action="submit" className="btn btn-primary"> post new review</button>
-            </form>
-        );
-    }
+    return (
+      <form className="under-nav " onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+        <Field
+          label="Review date:"
+          name="reviewDate"
+          component={this.renderField}
+        />        
+        <Field
+          label="Project Name:"
+          name="projectName"
+          component={this.renderField}
+        />
+        <Field
+          label="Single sentance summary:"
+          name="singleSentance"
+          component={this.renderField}
+        />
+        <Field
+          label="Three sentance summary:"
+          name="threeSentance"
+          component={this.renderField}
+        />
+        <Field
+          label="Main photo link:"
+          name="photoMain"
+          component={this.renderField}
+        />
+        <Field
+          label="team members:"
+          name="team"
+          component={this.renderField}
+        />
+        <Field
+          label="Project launch date:"
+          name="launchDate"
+          component={this.renderField}
+        />
+        <Field
+          label="Project delivery date:"
+          name="delivery"
+          component={this.renderField}
+        />
+        <Field
+          label="Numeric grade of project:"
+          name="gradeOverall"
+          component={this.renderField}
+        />
+        <Field
+          label="Numeric grade for manufacturing:"
+          name="gradeMaking"
+          component={this.renderField}
+        />
+        <Field
+          label="Numeric grade for fund raising:"
+          name="gradeFinancials"
+          component={this.renderField}
+        />
+        <Field
+          label="Numeric grade for feasibility:"
+          name="gradeFeasible"
+          component={this.renderField}
+        />
+        <Field
+          label="Summary of the project:"
+          name="projectSummary"
+          component={this.renderField}
+        />
+        <Field
+          label="Detailed overall review:"
+          name="detailOverall"
+          component={this.renderField}
+        />
+        <Field
+          label="Detailed manufacturing review:"
+          name="detailManufacturing"
+          component={this.renderField}
+        />
+        <Field
+          label="Detailed budget review:"
+          name="detailBudget"
+          component={this.renderField}
+        />
+        <Field
+          label="Detailed review of the engineering:"
+          name="detailEngineering"
+          component={this.renderField}
+        />
+        <button type="submit" className="btn btn-primary">Submit</button>
+        <Link to="/" className="btn btn-danger">Cancel</Link>
+      </form>
+    );
+  }
 }
 
-function mapStateToProps(state) {
-    return { errorMessage: state.auth.error };
+function validate(values) {
+  // console.log(values) -> { title: 'asdf', categories: 'asdf', content: 'asdf' }
+  const errors = {};
+
+  // Validate the inputs from 'values'
+ /* if (!values.title) {
+    errors.title = "Enter a title";
+  }
+  if (!values.categories) {
+    errors.categories = 'Enter some categories';
+  }
+  if (!values.content) {
+    errors.content = 'Enter some content please';
+  }*/
+
+  // If errors is empty, the form is fine to submit
+  // If errors has *any* properties, redux form assumes form is invalid
+  return errors;
 }
 
 export default reduxForm({
-    form: 'newReview',
-    fields: ['projectName', 'singleSentance', 'threeSentance', 'photoMain', 'team', 'launchDate', 'delivery', 'gradeOverall', 'gradeMaking', 'gradeFinancials', 'gradeFeasible', 'projectSummary', 'detailOverall', 'detailManufacturing', 'detailBudget', 'detailEngineering']
-}, mapStateToProps, actions)(PostNewReview);
+  validate,
+  form: 'ReviewNewForm'
+})(
+  connect(null,{ postNewReview })(ReviewNew)
+);
+
+
+
+

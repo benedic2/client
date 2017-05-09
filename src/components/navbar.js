@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import emailPic from '../../resource/email.jpg';
 import twitter from '../../resource/twitter.png';
 import facebook from '../../resource/facebook.ico';

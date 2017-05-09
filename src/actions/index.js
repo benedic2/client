@@ -1,34 +1,54 @@
 import axios from 'axios';
-import { browserHistory } from 'react-router';
+import { BrowserRouter} from 'react-router-dom';
 import {
     AUTH_USER,
     UNAUTH_USER,
     AUTH_ERROR,
-    FETCH_MESSAGE
+    FETCH_MESSAGE,
+    FETCH_REVIEWS,
+    CREATE_REVIEW,
+    FETCH_REVIEW
 } from './types';
 
 const ROOT_URL = 'http://localhost:3090';
+const ROOT_URL_SECURE = 'https://localhost:3090';
+
 const authAxios = axios.create({
     headers: {authorization: localStorage.getItem('token')}
 });
 
-export function postNewReview({projectName, singleSentance, threeSentance, photoMain, team, launchDate, delivery, gradeOverall, gradeMaking, gradeFinancials, gradeFeasible, projectSummary, detailOverall, detailManufacturing, detailBudget, detailEngineering}) {
-    return function(dispatch) {
-/*        axios.post(`${ROOT_URL}/review_secretspot`, 
-                   {headers: {authorization: localStorage.getItem('token')}, 
-                    projectName, singleSentance, threeSentance, photoMain, team, launchDate, delivery, gradeOverall, gradeMaking, gradeFinancials, gradeFeasible, projectSummary, detailOverall, detailManufacturing, detailBudget, detailEngineering} )*/
-        authAxios.post(`${ROOT_URL}/review_secretspot`, {projectName, singleSentance, threeSentance, photoMain, team, launchDate, delivery, gradeOverall, gradeMaking, gradeFinancials, gradeFeasible, projectSummary, detailOverall, detailManufacturing, detailBudget, detailEngineering})
-        
-        .catch(error => {
-            dispatch(authError('review did not post'));
-        })
-    }
+export function fetchReviews() {
+    const request = axios.get(`${ROOT_URL}/reviews`);
+
+    return {
+        type: FETCH_REVIEWS,
+        payload: request
+    }; 
 }
 
-export function signinUser({ email, password }) {
+export function fetchReview(_id) {
+    const request = axios.get(`${ROOT_URL}/review/${_id}`);
+    
+    return {
+        type: FETCH_REVIEW,
+        payload: request
+    }; 
+}
+
+export function postNewReview(values, callback) {
+    const request = authAxios.post(`${ROOT_URL}/review_secretspot`, values)
+    .then(() => callback());
+
+    return {
+        type: CREATE_REVIEW,
+        payload: request
+    };
+}
+
+export function signinUser(values, callback) {
     return function(dispatch) {
         // Submit email/password to the server
-        axios.post(`${ROOT_URL}/signin`, { email, password })
+        axios.post(`${ROOT_URL}/signin`, values)
             .then(response => {
             // If request is good...
             // - Update state to indicate user is authenticated
@@ -36,8 +56,8 @@ export function signinUser({ email, password }) {
             // - Save the JWT token
             localStorage.setItem('token', response.data.token);
             // - redirect to the route '/feature'
-            browserHistory.push('/feature');
         })
+            .then(() => callback())
             .catch(error => {
             // If request is bad...
             // - Show an error to the user
@@ -46,14 +66,14 @@ export function signinUser({ email, password }) {
     }
 }
 
-export function signupUser({ email, password }) {
+export function signupUser(values, callback) {
     return function(dispatch) {
-        axios.post(`${ROOT_URL}/signup`, { email, password })
+        axios.post(`${ROOT_URL}/signup`, {"email":values.email,"password":values.password})
             .then(response => {
             dispatch({ type: AUTH_USER });
             localStorage.setItem('token', response.data.token);
-            browserHistory.push('/feature');
         })
+            .then(() => callback())
             .catch( error => {
             if (error.response) {
                 // The request was made, but the server responded with a status code 
@@ -95,3 +115,4 @@ export function fetchMessage() {
         });
     }
 }
+

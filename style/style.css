@@ -32,6 +32,11 @@
     padding:5px;
 }
 
+.project-div-text{
+    height:35%;
+    overflow: hidden;
+}
+
 .project-inner-div{
     background-color: #fafafa;
     border-radius: 10px;
@@ -223,4 +228,21 @@ padding-top:50%;
   height: 100%;
   z-index: 11;
   background-color: rgba(0,0,0,0.5); /*dim the background*/
+}
+
+.main-container-height{
+    height:1500px;
+    overflow:hidden;
+}
+
+.full-height{
+    height:100%;
+}
+
+.third-height{
+    height:33%;
+}
+
+.quarter-height{
+    height:20%;
 }
