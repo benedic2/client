@@ -3,13 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import {fetchReviews} from '../actions/index';
-
-class ReviewsList extends Component {
-    componentDidMount () {
-        this.props.fetchReviews(this.props.criteria);
-    }
-
+class SearchResults extends Component {
 
     renderReviews() {
         return _.map(this.props.reviews, review => {
@@ -39,21 +33,23 @@ class ReviewsList extends Component {
     }
 
     render() {
-        // console.log(this.props);
+        console.log(this.props.reviews)
         return (
-//            <div className="full-height container-fluid">
-            <div className="container-fluid">
-                <div className="row quarter-height" >
+            //            <div className="full-height container-fluid">
+            <div className="container-fluid ">
+                <div className="row quarter-height " >
                     {this.renderReviews()}
                 </div>
             </div>
+
         );
     }
 
 }
 
-function mapStateToProps(state, ownProps) {
-    return {reviews: state.reviews[ownProps.criteria] };
+function mapStateToProps(state) {
+    return {reviews: state.reviews.searchResults };
 }
 
-export default connect(mapStateToProps, {fetchReviews})(ReviewsList);
+
+export default connect(mapStateToProps)(SearchResults);

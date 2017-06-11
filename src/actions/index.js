@@ -7,7 +7,11 @@ import {
     FETCH_MESSAGE,
     FETCH_REVIEWS,
     CREATE_REVIEW,
-    FETCH_REVIEW
+    FETCH_REVIEW,
+    FETCH_REVIEWS_LAUNCH_DATE,
+    FETCH_REVIEWS_REVIEW_DATE,
+    REVIEW_SEARCH,
+    CLEAR_SEARCH
 } from './types';
 
 const ROOT_URL = 'http://localhost:3090';
@@ -17,18 +21,47 @@ const authAxios = axios.create({
     headers: {authorization: localStorage.getItem('token')}
 });
 
-export function fetchReviews() {
-    const request = axios.get(`${ROOT_URL}/reviews`);
 
+export function clearSearch() {
+    return { type: CLEAR_SEARCH };
+}
+
+export function searchReviews (values){
+    const request = axios.post(`${ROOT_URL}/review/search`, values)
+    
     return {
-        type: FETCH_REVIEWS,
+        type: REVIEW_SEARCH,
         payload: request
     }; 
+
+}
+
+export const fetchReviews = (criteria) => {
+    const request = axios.get(`${ROOT_URL}/reviews/${criteria}`);
+    let actionType = "";
+
+    switch(criteria) {
+        case 'launchDate':
+            actionType = FETCH_REVIEWS_LAUNCH_DATE;
+            break;
+        case 'reviewDate':
+            actionType = FETCH_REVIEWS_REVIEW_DATE;
+            break;    
+        default:
+            actionType = FETCH_REVIEWS;
+            break;
+                   };
+
+
+return {
+    type: actionType, 
+    payload: request
+}; 
 }
 
 export function fetchReview(_id) {
     const request = axios.get(`${ROOT_URL}/review/${_id}`);
-    
+
     return {
         type: FETCH_REVIEW,
         payload: request

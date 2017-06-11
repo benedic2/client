@@ -5,3 +5,7 @@ export const FETCH_MESSAGE = 'fetch_message';
 export const FETCH_REVIEWS = 'fetch_reviews';
 export const CREATE_REVIEW = 'create_review';
 export const FETCH_REVIEW = 'fetch_review';
+export const FETCH_REVIEWS_REVIEW_DATE = 'fetch_reviews_review_date';
+export const FETCH_REVIEWS_LAUNCH_DATE = 'fetch_reviews_launch_date';
+export const REVIEW_SEARCH = 'review_search';
+export const CLEAR_SEARCH = 'clear_search';

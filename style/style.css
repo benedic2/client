@@ -4,16 +4,16 @@
 }
 ::-webkit-scrollbar:horizontal {
     height: 7px;
-    
+
 } 
 /* Track */
 ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1); 
     -webkit-border-radius: 10px;
     border-radius: 10px;
-    
+
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
@@ -22,7 +22,7 @@
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0); 
 }
 ::-webkit-scrollbar-thumb:window-inactive {
-	background: rgba(50,200,200,0); 
+    background: rgba(50,200,200,0); 
 }
 
 /* Front Page Css*/
@@ -38,9 +38,9 @@
 }
 
 .project-inner-div{
-    background-color: #fafafa;
+    background-color: white;
     border-radius: 10px;
-    border: 1px gray solid;
+    border: 1.5px outset rgba(200,200,200,.5);
     padding:5px;
     color: black;
     width:100%;
@@ -71,7 +71,7 @@
 .carousel-control.left, .carousel-control.right {
     background-image: none;
     color: #d052ff;
- }
+}
 
 
 /* CSS for Comments*/
@@ -101,6 +101,10 @@
     padding-bottom: 10px;
 }
 
+.progress-other{
+    background-color: #191847;
+}
+
 
 .container-footer {
     padding-bottom: 200px;
@@ -116,8 +120,8 @@
 }
 
 .infobar{
-border: none; 
-text-decoration: none;
+    border: none; 
+    text-decoration: none;
 }
 
 .primary {
@@ -133,35 +137,36 @@ form a {
     margin-left: 5px;
 }
 .navbar {
-  margin-bottom: 0;
-  border-radius: 0;
+    margin-bottom: 0;
+    border-radius: 0;
 }
 
 /* Add a gray background color and some padding to the footer */
 .footer {
-  background-color: #f2f2f2;
-  padding: 25px;
+    background-color: #f2f2f2;
+    padding: 25px;
 }
 .my_jumbotron {
     position: relative;
-    background-image:  url('../resource/Background.jpg');
     width: 100%;
     min-height: 400px;
     background-size: cover;
     overflow: hidden;
     border-radius: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
 }
 .headshot {
     background-image: url('../resource/Head.png');
     border-radius: 50%;
     background-repeat: no-repeat;
     /* make it responsive */
-/*max-width: 50%;
-width:50%;
-height:auto;
-display:block; */
-/* div height to be the same as width*/
-padding-top:50%;   
+    /*max-width: 50%;
+    width:50%;
+    height:auto;
+    display:block; */
+    /* div height to be the same as width*/
+    padding-top:50%;   
 }
 .img-head {
     border: 6px solid rgba(0,0,0,.7); 
@@ -170,8 +175,19 @@ padding-top:50%;
 .highlighter {
     background: rgba(0,0,0,.5);
     color: white;
-    padding: 2%;
+    padding: 1%;
 }
+
+.under-banner {
+    color: rgba(75,75,75,1);
+    padding: 1%;
+    border-top: 0px solid rgba(100,100,100,1);
+    border-bottom: 0px solid rgba(100,100,100,1);
+    border-left: 30px solid #d052ff;
+    font-weight: bolder;
+}
+
+
 .maintext {
     color: red;
     font-weight: bold;
@@ -199,10 +215,10 @@ padding-top:50%;
 .footerBanner:hover div h2 {
     background:rgba(0,0,0,0.5);
     color: white;
-     -webkit-transform: translateY(-5px);
-      -ms-transform: translateY(-5px);
-      transform: translateY(-5px);
-     -webkit-transition: all 0.4s ease-in-out;
+    -webkit-transform: translateY(-5px);
+    -ms-transform: translateY(-5px);
+    transform: translateY(-5px);
+    -webkit-transition: all 0.4s ease-in-out;
     transition: all 0.4s ease-in-out;
 }
 .smedia {
@@ -211,23 +227,23 @@ padding-top:50%;
 }
 
 .overlay{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 10;
-  background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-color: rgba(0,0,0,0.5);
 
 }
 .overlay1{
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 11;
-  background-color: rgba(0,0,0,0.5); /*dim the background*/
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 11;
+    background-color: rgba(0,0,0,0.5); /*dim the background*/
 }
 
 .main-container-height{
@@ -241,6 +257,10 @@ padding-top:50%;
 
 .third-height{
     height:33%;
+}
+
+.two-third-height{
+    height:66%;
 }
 
 .quarter-height{
