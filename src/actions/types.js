@@ -9,3 +9,4 @@ export const FETCH_REVIEWS_REVIEW_DATE = 'fetch_reviews_review_date';
 export const FETCH_REVIEWS_LAUNCH_DATE = 'fetch_reviews_launch_date';
 export const REVIEW_SEARCH = 'review_search';
 export const CLEAR_SEARCH = 'clear_search';
+export const CREATE_COMMENT = 'create_comment';

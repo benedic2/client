@@ -6,6 +6,7 @@ import { fetchReview} from '../actions';
 
 import Banner from './banner';
 import GradeBar from './grade_bar';
+import CommentNew from './auth/comment_form';
 
 class ReviewShow extends Component {
     componentDidMount() {
@@ -54,16 +55,16 @@ class ReviewShow extends Component {
 
                                 Overall Grade
                                 <GradeBar gradeOverall={review.gradeOverall}  isMain="true"/>
-                                
+
                                 Manufacturing Plan
                                 <GradeBar gradeOverall={review.gradeMaking} />
 
                                 Funding level 
                                 <GradeBar gradeOverall={review.gradeFinancials} />
-                                
+
                                 Engineering challenge 
                                 <GradeBar gradeOverall={review.gradeFeasible} />
-                                
+
                                 <div className="text-center">      
                                     <div id="myCarousel" className="carousel slide carousel-my" data-ride="carousel" data-interval="false">
                                         <ol className="carousel-indicators">
@@ -117,54 +118,20 @@ class ReviewShow extends Component {
                             <div className="comment-container col-sm-3 col-xs-4 text-left"> 
 
                                 <div className="comment">
-                                    <h4><strong>Johnathen Doe</strong> yesterday </h4>
-                                    <h5>Rating: B, Late: 2 months</h5>
-                                    <p className="text-left">IMHO these guys have no idea what they are doing on timing. I have seen a lot of projects like these set ambitious goals and not meet them..  </p>        
+                                    <CommentNew _id={review._id}/>
                                 </div>
-
-                                <div className="comment">
-                                    <h4><strong>Janey Doe</strong>2 days ago</h4>
-                                    <h5>Rating: C, Late: 0 months</h5>
-                                    <p className="text-left">Jane has the following things to say. I hope you find them interesting. They may not be...</p>        </div>              
-
                                 <div className="comment">
                                     <h4><strong>Johnathen Doe</strong> yesterday </h4>
                                     <h5>Rating: B, Late: 2 months</h5>
                                     <p className="text-left">IMHO these guys have no idea what they are doing on timing. I have seen a lot of projects like these set ambitious goals and not meet them..  </p>        
                                 </div>
 
-                                <div className="comment">
-                                    <h4><strong>Johnathen Doe</strong> yesterday </h4>
-                                    <h5>Rating: B, Late: 2 months</h5>
-                                    <p className="text-left">IMHO these guys have no idea what they are doing on timing. I have seen a lot of projects like these set ambitious goals and not meet them..  </p>        
-                                </div>
 
-                                <div className="comment">
-                                    <h4><strong>Janey Doe</strong>2 days ago</h4>
-                                    <h5>Rating: C, Late: 0 months</h5>
-                                    <p className="text-left">Jane has the following things to say. I hope you find them interesting. They may not be...</p>        </div>              
+                                <div className="col-sm-2 text-right"></div>
 
-                                <div className="comment">
-                                    <h4><strong>Janey Doe</strong>2 days ago</h4>
-                                    <h5>Rating: C, Late: 0 months</h5>
-                                    <p className="text-left">Jane has the following things to say. I hope you find them interesting. They may not be...</p>        </div>              
 
-                                <div className="comment">
-                                    <h4><strong>Janey Doe</strong>2 days ago</h4>
-                                    <h5>Rating: C, Late: 0 months</h5>
-                                    <p className="text-left">Jane has the following things to say. I hope you find them interesting. They may not be...</p>        </div>              
-
-                                <div className="comment">
-                                    <h4><strong>Janey Doe</strong>2 days ago</h4>
-                                    <h5>Rating: C, Late: 0 months</h5>
-                                    <p className="text-left">Jane has the following things to say. I hope you find them interesting. They may not be...</p>        </div>              
 
                             </div>
-
-                            <div className="col-sm-2 text-right"></div>
-
-
-
                         </div>
                     </div>
                 </div>

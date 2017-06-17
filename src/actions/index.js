@@ -11,7 +11,8 @@ import {
     FETCH_REVIEWS_LAUNCH_DATE,
     FETCH_REVIEWS_REVIEW_DATE,
     REVIEW_SEARCH,
-    CLEAR_SEARCH
+    CLEAR_SEARCH,
+    CREATE_COMMENT
 } from './types';
 
 const ROOT_URL = 'http://localhost:3090';
@@ -21,6 +22,15 @@ const authAxios = axios.create({
     headers: {authorization: localStorage.getItem('token')}
 });
 
+export function postNewComment(values, _id, user, callback) {
+    const request = authAxios.post(`${ROOT_URL}/comment/${_id}/${user}`, values)
+    .then(() => callback());
+
+    return {
+        type: CREATE_COMMENT,
+        payload: request
+    };
+}
 
 export function clearSearch() {
     return { type: CLEAR_SEARCH };
@@ -88,6 +98,7 @@ export function signinUser(values, callback) {
             dispatch({ type: AUTH_USER });
             // - Save the JWT token
             localStorage.setItem('token', response.data.token);
+            localStorage.setItem('user', response.data.user);
             // - redirect to the route '/feature'
         })
             .then(() => callback())
@@ -131,7 +142,7 @@ export function authError(error) {
 
 export function signoutUser() {
     localStorage.removeItem('token');
-
+    localStorage.removeItem('user');
     return { type: UNAUTH_USER };
 }
 

@@ -38,10 +38,8 @@ class NavBar extends Component {
     }    
 
     onClear() {
-        console.log("clear 1");
         this.props.clearSearch();
-        (this.props.reset);
-        console.log('clear 2');
+        this.props.reset();
     }
 
     onSubmit(values) {
