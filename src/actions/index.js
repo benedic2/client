@@ -12,7 +12,8 @@ import {
     FETCH_REVIEWS_REVIEW_DATE,
     REVIEW_SEARCH,
     CLEAR_SEARCH,
-    CREATE_COMMENT
+    CREATE_COMMENT,
+    FETCH_COMMENTS
 } from './types';
 
 const ROOT_URL = 'http://localhost:3090';
@@ -24,13 +25,21 @@ const authAxios = axios.create({
 
 export function postNewComment(values, _id, user, callback) {
     const request = authAxios.post(`${ROOT_URL}/comment/${_id}/${user}`, values)
-    .then(() => callback());
+    .then((response) => callback());
 
     return {
         type: CREATE_COMMENT,
         payload: request
     };
 }
+
+export const fetchComments = (criteria) => {
+    const request = axios.get(`${ROOT_URL}/comments/${criteria}`);
+ 
+    return {
+        type: FETCH_COMMENTS,
+        payload: request
+    }}
 
 export function clearSearch() {
     return { type: CLEAR_SEARCH };
@@ -116,6 +125,7 @@ export function signupUser(values, callback) {
             .then(response => {
             dispatch({ type: AUTH_USER });
             localStorage.setItem('token', response.data.token);
+            localStorage.setItem('user', response.data.user);            
         })
             .then(() => callback())
             .catch( error => {

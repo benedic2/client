@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import {fetchReviews} from '../actions/index';
+import GradeBar from './grade_bar'
 
 class ReviewsList extends Component {
     componentDidMount () {
@@ -22,13 +23,8 @@ class ReviewsList extends Component {
                             <p className="project-div-text">{review.singleSentance}</p>
                             Overall grade        
                             <div>
-                                <div className="progress" >
-                                    <div className="progress-bar " role="progressbar" aria-valuenow={review.gradeOverall} aria-valuemin="0" aria-valuemax="100" style = {{"width":"80%"}}>
-                                        <strong>B</strong>
-                                    </div>
-                                </div>
+                                <GradeBar gradeOverall={review.gradeOverall} />
                             </div>
-
                         </div>
                     </Link>
                 </div>
@@ -41,7 +37,7 @@ class ReviewsList extends Component {
     render() {
         // console.log(this.props);
         return (
-//            <div className="full-height container-fluid">
+            //            <div className="full-height container-fluid">
             <div className="container-fluid">
                 <div className="row quarter-height" >
                     {this.renderReviews()}

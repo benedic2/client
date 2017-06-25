@@ -5,11 +5,13 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { postNewComment } from '../../actions';
 import { clearSearch } from '../../actions';
+import {fetchReview} from '../../actions'
 
 // Need to add an action for posting the new comment
 
 class CommentNew extends Component {
 
+    
     renderField(field) {
         const { meta: { touched, error} } = field;
         const className = `form-group ${touched && error ? 'has-danger' : ''}`;
@@ -33,10 +35,9 @@ class CommentNew extends Component {
     //Need to decide what to do after the comment is sent. could possibly just show the post comment box when there is not a comment associated with the user and project. Could have three possibilities: 1 no user than show sign up link hide all commments, 2 user not posted then show form, 3 user has posted then hide form or show the rating that was given. would get rid of the callback 
 
     onSubmit(values) {
-        this.props.postNewComment(values, this.props._id, localStorage.user, () => {
-            this.props.history.push('/');
-        });
+        this.props.postNewComment(values, this.props._id, localStorage.user,() => this.props.fetchReview(this.props._id))
     }
+    
 
     onClear() {
         this.props.reset();
@@ -46,7 +47,7 @@ class CommentNew extends Component {
         const { handleSubmit } = this.props;
 
         return (
-            <form className="under-nav " onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+            <form className="container-fluid " onSubmit={handleSubmit(this.onSubmit.bind(this))} >
                 <Field
                     label="Opinion on this project:"
                     name="comment"
@@ -113,7 +114,7 @@ export default reduxForm({
     validate,
     form: 'CommentNewForm'
 })(
-    connect(mapStateToProps,{postNewComment, clearSearch })(CommentNew)
+    connect(mapStateToProps,{postNewComment, clearSearch, fetchReview })(CommentNew)
 );
 
 

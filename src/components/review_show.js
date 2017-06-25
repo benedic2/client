@@ -7,15 +7,18 @@ import { fetchReview} from '../actions';
 import Banner from './banner';
 import GradeBar from './grade_bar';
 import CommentNew from './auth/comment_form';
+import CommentList from './comment_list';
 
 class ReviewShow extends Component {
-    componentDidMount() {
+
+       componentDidMount() {
         const { _id } = this.props.match.params;
         this.props.fetchReview(_id);
     }
-
+    
     render() {
-        const review =_.map(this.props.reviews)[0]  
+        const review =_.map(this.props.reviews)[0] 
+        console.log(this.props)
         if (!review) {
             return <div className="under-nav">Loading...</div>;
         }else{
@@ -117,19 +120,9 @@ class ReviewShow extends Component {
 
                             <div className="comment-container col-sm-3 col-xs-4 text-left"> 
 
-                                <div className="comment">
                                     <CommentNew _id={review._id}/>
-                                </div>
-                                <div className="comment">
-                                    <h4><strong>Johnathen Doe</strong> yesterday </h4>
-                                    <h5>Rating: B, Late: 2 months</h5>
-                                    <p className="text-left">IMHO these guys have no idea what they are doing on timing. I have seen a lot of projects like these set ambitious goals and not meet them..  </p>        
-                                </div>
-
-
-                                <div className="col-sm-2 text-right"></div>
-
-
+ 
+                                <CommentList criteria = {review._id} />
 
                             </div>
                         </div>
@@ -142,7 +135,8 @@ class ReviewShow extends Component {
 
 
 function mapStateToProps(state, ownProps) {
-    return { reviews: state.reviews[ownProps.match.params._id]};
+    return { reviews: state.reviews[ownProps.match.params._id],
+           newest: state.comments.newest};
 }
 
 
